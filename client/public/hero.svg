@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#0f172a"></rect>
+
+  <!-- Glow Circle -->
+  <circle cx="400" cy="250" r="120" fill="#4f46e5" opacity="0.3"></circle>
+
+  <!-- Main Box -->
+  <rect x="250" y="150" width="300" height="200" rx="15" fill="#1e293b"></rect>
+
+  <!-- Thumbnail Preview -->
+  <rect x="270" y="170" width="260" height="120" rx="10" fill="#6366f1"></rect>
+
+  <!-- Text -->
+  <text x="400" y="330" text-anchor="middle" fill="#fff" font-size="24">
+    AI Thumbnail Generator
+  </text>
+</svg>
