@@ -20,11 +20,9 @@ export default function Navbar() {
                 <img src="logo.svg" alt="logo" className="h-8.5 w-auto" />
             </Link>
                 <div className="hidden md:flex items-center gap-8 transition duration-500">
-                    {navlinks.map((link: INavLink) => (
-                        <NavLink key={link.name} to={link.href} className="hover:text-pink-500 transition">
-                            {link.name}
-                        </NavLink>
-                    ))}
+                    <Link to='/' className="hover:text-pink-300 transition">Home</Link>
+                    <Link to='/' className="hover:text-pink-300 transition">Home</Link>
+                
                 </div>
 
                 <button className="hidden md:block px-6 py-2.5 bg-pink-600 hover:bg-pink-700 active:scale-95 transition-all rounded-full">
