@@ -2,8 +2,15 @@
 import { CheckIcon, ChevronRightIcon, VideoIcon } from "lucide-react";
 import TiltedImage from "../components/TiltImage";
 import { motion } from "motion/react";
+import { useNavigate } from "react-router-dom";
 
 export default function HeroSection() {
+
+    const navgate = useNavigate()
+
+
+
+
     const specialFeatures = [
         "No credit card",
         "30 days free trial",
@@ -51,11 +58,11 @@ export default function HeroSection() {
                 transition={{ type: "spring", stiffness: 320, damping: 70, mass: 1 }}
             >
                 <button className="bg-pink-600 hover:bg-pink-700 text-white rounded-full px-7 h-11">
-                    Get started
+                    Generate now
                 </button>
                 <button className="flex items-center gap-2 border border-pink-900 hover:bg-pink-950/50 transition rounded-full px-6 h-11">
                     <VideoIcon strokeWidth={1} />
-                    <span>Watch demo</span>
+                    <span> See how it works</span>
                 </button>
             </motion.div>
 
