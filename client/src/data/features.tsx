@@ -7,9 +7,14 @@ export const featuresData: IFeature[] = [
         description: "Our AI anaylyzes video content to suggest the most clickable concepts.",
     },
        {
-        icon: "/assets/zap-icon.svg",
+        icon: "/assets/thumb-icon.svg",
         title: "Smart Analysis",
-        description: "Our AI anaylyzes video content to suggest the most clickable concepts.",
+        description: "Generate vibrant, hogh-contrast thumbnails that stand out in the feed. ",
+    },
+      {
+        icon: "/assets/thumb-icon.svg",
+        title: "Smart Analysis",
+        description: "Get fullu layerd designs you can tweak to perfection if needed.",
     },
 
 ];
