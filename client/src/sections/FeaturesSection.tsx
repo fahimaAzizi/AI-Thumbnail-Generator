@@ -19,6 +19,7 @@ export default function FeaturesSection() {
                     >
                         <div className="p-6 rounded-xl space-y-4 border border-slate-800 bg-slate-950 max-w-80 w-full">
                             {feature.icon}
+                            <img src={feature.icon} alt={feature.title} />
                             <h3 className="text-base font-medium text-white">
                                 {feature.title}
                             </h3>
