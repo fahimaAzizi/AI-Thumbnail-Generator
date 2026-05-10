@@ -14,7 +14,7 @@ export default function Footer() {
                 transition={{ type: "spring", stiffness: 280, damping: 70, mass: 1 }}
             >
                 <a href="https://prebuiltui.com?utm_source=pixels">
-                    <img className="size-8 aspect-square" src="/assets/footer-logo.svg" alt="footer logo" width={32} height={32} />
+                    <img className="size-8 aspect-square" src="favicon.svg" alt="footer logo" width={32} height={32} />
                 </a>
                 {footerData.map((section, index) => (
                     <div key={index}>
@@ -52,7 +52,7 @@ export default function Footer() {
                         <YoutubeIcon className="size-6 hover:text-pink-500" />
                     </a>
                 </div>
-                <p className="mt-3 text-center">&copy; {new Date().getFullYear()} <a href="https://prebuiltui.com?utm_source=pixels">PrebuiltUI</a></p>
+                <p className="mt-3 text-center">&copy; {new Date().getFullYear()} <a href="https://prebuiltui.com?utm_source=pixels">Thunblify</a></p>
             </motion.div>
         </footer>
     );
