@@ -15,14 +15,15 @@ const App = () => {
         setFormData(prev => ({ ...prev, [name]: value }))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
     }
 
     return (
         <>
-            <form
+        <div className="min-h-screen flex items-csnter justify-center">
+         <form
                 onSubmit={handleSubmit}
                 className="w-full sm:w-87.5 text-center bg-white/6 border border-white/10 rounded-2xl px-8">
                 <h1 className="text-white text-3xl mt-10 font-medium">
@@ -63,6 +64,8 @@ const App = () => {
                     <span className="text-indigo-400 hover:underline ml-1">click here</span>
                 </p>
             </form>
+        </div>
+            
             {/* Soft Backdrop*/}
             <div className='fixed inset-0 -z-1 pointer-events-none'>
                 <div className='absolute left-1/2 top-20 -translate-x-1/2 w-245 h-115 bg-linear-to-tr from-indigo-800/35 to-transparent rounded-full blur-3xl' />
