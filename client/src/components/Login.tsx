@@ -1,17 +1,16 @@
-import React from 'react'
+import { useState } from "react"
 
-function Login() {
-  return (
-    <>
- const [state, setState] = React.useState("login")
+const App = () => {
 
-    const [formData, setFormData] = React.useState({
+    const [state, setState] = useState ("login")
+
+    const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: ''
     })
 
-    const handleChange = (e) => {
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
         setFormData(prev => ({ ...prev, [name]: value }))
     }
@@ -71,8 +70,4 @@ function Login() {
             </div>
         </>
     )
-    </>
-  )
 }
-
-export default Login
