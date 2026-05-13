@@ -61,8 +61,22 @@ const Generate = () => {
     </div>
 
   </div>
+  {/* aspectratioselector */}
+  {/* coloerschemeselector */}
+{/* details */}
+ <div className='space-y-2'>
+  <label>
+    Additon Propts <span className='text-zinc-400 text-xs'></span>
+  </label>
+  <textarea value={additionalDetails} onChange={(e)=>setAdditionalDetails(e.target.value)}/>
 
+ </div>
 </div>
+{!id && (
+  <button>
+
+  </button>
+)}
 
       </div>
       
