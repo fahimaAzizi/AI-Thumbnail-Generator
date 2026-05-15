@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import type { ITestimonial } from '../types';
 import SoftBackdrop from '../components/SoftBackdrop';
 import { style } from 'motion/react-client';
+import AspectRatioSelector from '../components/AspectRatioSelector';
 
 const Generate = () => {
   const {id} = useParams();
@@ -69,6 +70,7 @@ const Generate = () => {
 
   </div>
   {/* aspectratioselector */}
+  <AspectRatioSelector />
   {/* coloerschemeselector */}
 {/* details */}
  <div className='space-y-2'>
