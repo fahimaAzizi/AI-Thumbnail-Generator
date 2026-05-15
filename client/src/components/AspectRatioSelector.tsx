@@ -10,12 +10,22 @@ const AspectRatioSelector = ({value, onChange} :{value: AspectRatio ; onchange: 
    '1:1' : <Square className='siz-6'/>,
    '9:16' :<RectangleVertical className='siz-6'/>
     } as Record<AspectRatio , React.ReactNode>
+
+
   return (
     <div className='space-y-3 dark'>
         
         <label className='block text-sn font-medium text-zinc-200'> Aspect Raio</label>
        <div className='flex flex-wrap gap-2'>
-        {AspectRatio.map}
+        {AspectRatio.map((ratio)=>{
+          const selected = value === ratio;
+
+          return (
+            <button key={ratio}>
+              {iconMap[rotio]}
+            </button>
+          )
+        })}
 
        </div>
     </div>
