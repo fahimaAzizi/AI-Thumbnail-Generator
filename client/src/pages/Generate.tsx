@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import type { ITestimonial } from '../types';
 import SoftBackdrop from '../components/SoftBackdrop';
+import { style } from 'motion/react-client';
 
 const Generate = () => {
   const {id} = useParams();
@@ -11,6 +12,12 @@ const Generate = () => {
    
    const [thumbnail, setThumbnail] = useState<ITestimonial | null>(null)
     const [loding, setLoging] = useState(false)
+
+    const [aspectRatio , setAspectRatio] = useState<AspectRatio>('16:9')
+    const [colorSchemeId , setColorSchemeId] = useState<string>(colorSchemes[0].id)
+    const [style , setStyle] =useState<ThumbnailStyle>('Blod 7 Grsphic')
+
+   const [styleDeropdownOpen , setStyleDropdownOpen] = useState(false)
 
   return (
     <>
