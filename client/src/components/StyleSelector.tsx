@@ -46,6 +46,11 @@ const styleIcons: Record<ThumbnailStyle, React.ReactNode> = {
 
       <button>
         <div className="space-y-1">
+          <div>
+            {styleIcons[value]}
+            <span>{value}</span>
+          </div>
+          <p>{styleDescriptions[value]}</p>
 
         </div>
       </button>
