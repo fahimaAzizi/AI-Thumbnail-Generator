@@ -1,5 +1,5 @@
 import { Type } from "react";
-import { CpuIcon, ImageIcon, PenToolIcon, SparkleIcon, SquareIcon } from "lucide-react"
+import { ChevronDownIcon, CpuIcon, ImageIcon, PenToolIcon, SparkleIcon, SquareIcon } from "lucide-react"
 import type { ThumbnailStyle } from "../assets/assets"
 
 const StyleSelector = ({
@@ -50,9 +50,10 @@ const styleIcons: Record<ThumbnailStyle, React.ReactNode> = {
             {styleIcons[value]}
             <span>{value}</span>
           </div>
-          <p>{styleDescriptions[value]}</p>
+          <p className="text-xs text-zinc-400">{styleDescriptions[value]}</p>
 
         </div>
+        <ChevronDownIcon className={['h-5 w-5 textzinc-400 transition-teansfrom', isOpen && 'rotate-180'].join('')} />
       </button>
 
     </div>

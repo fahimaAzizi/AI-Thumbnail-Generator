@@ -4,6 +4,7 @@ import type { ITestimonial, AspectRatio, ThumbnailStyle } from '../types'
 import SoftBackdrop from '../components/SoftBackdrop'
 import AspectRatioSelector from '../components/AspectRatioSelector'
 import { colorSchemes } from '../assets/assets'
+import StyleSelector from '../components/StyleSelector'
 
 const Generate = () => {
   const { id } = useParams()
@@ -81,6 +82,7 @@ const Generate = () => {
                     value={aspectRatio}
                     onChange={setAspectRatio}
                   />
+                  <StyleSelector value={style} onChange={setStyle} isOpen={styleDropdownOpen} setIsOpen={setStyleDropdownOpen} />
 
                   {/* ADDITIONAL DETAILS */}
                   <div className='space-y-2'>
