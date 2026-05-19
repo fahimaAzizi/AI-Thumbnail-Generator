@@ -1,6 +1,7 @@
 import { Type } from "react";
 import { ChevronDownIcon, CpuIcon, ImageIcon, PenToolIcon, SparkleIcon, SquareIcon } from "lucide-react"
 import type { ThumbnailStyle } from "../assets/assets"
+import { div } from "motion/react-client";
 
 const StyleSelector = ({
   value,
@@ -55,6 +56,11 @@ const styleIcons: Record<ThumbnailStyle, React.ReactNode> = {
         </div>
         <ChevronDownIcon className={['h-5 w-5 textzinc-400 transition-teansfrom', isOpen && 'rotate-180'].join('')} />
       </button>
+      {isOpen && (
+        <div>
+          
+        </div>
+      )}
 
     </div>
   )
