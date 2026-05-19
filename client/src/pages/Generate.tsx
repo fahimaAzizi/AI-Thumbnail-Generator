@@ -5,6 +5,7 @@ import SoftBackdrop from '../components/SoftBackdrop'
 import AspectRatioSelector from '../components/AspectRatioSelector'
 import { colorSchemes } from '../assets/assets'
 import StyleSelector from '../components/StyleSelector'
+import ColorSchemeSelector from '../components/ColorSchemeSelector'
 
 const Generate = () => {
   const { id } = useParams()
@@ -83,7 +84,7 @@ const Generate = () => {
                     onChange={setAspectRatio}
                   />
                   <StyleSelector value={style} onChange={setStyle} isOpen={styleDropdownOpen} setIsOpen={setStyleDropdownOpen} />
-
+                    <ColorSchemeSelector value={colorSchemeId} onChange={setColorSchemeId} />
                   {/* ADDITIONAL DETAILS */}
                   <div className='space-y-2'>
 
