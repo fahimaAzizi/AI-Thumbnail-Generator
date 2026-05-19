@@ -1,8 +1,9 @@
 import React from 'react'
 import type { AspectRatio } from '../assets/assets';
+import { Loader2Icon } from 'lucide-react';
 
 const PreviewPanel = ({thumbnail, isLoading, aspectRatio} : 
-  {thumbnail: IThumbnail , isLoading: boolean; aspectRatio: AspectRatio}) =>{
+  {thumbnail: IThumbnail, isLoading: boolean; aspectRatio: AspectRatio}) =>{
     
     
     
@@ -13,7 +14,18 @@ const PreviewPanel = ({thumbnail, isLoading, aspectRatio} :
 } as Record<AspectRatio, string>;
 
   return (
-    <div>PreviewPanel</div>
+   <div className="relative mx-auto w-full max-w-2xl">
+    <div
+      className={`relative overflow-hidden ${aspectClasses[aspectRatio]}`}
+    >
+      {/* Loading state */}
+      {isLoading && (
+        <div>
+          <Loader2Icon className='size-8 animate-spin text-zinc-400'/>
+        </div>
+      )}
+    </div>
+  </div>
   )
 }
 
