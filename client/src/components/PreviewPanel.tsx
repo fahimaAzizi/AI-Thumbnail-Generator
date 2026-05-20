@@ -1,6 +1,6 @@
 import React from 'react'
 import type { AspectRatio } from '../assets/assets';
-import { Loader2Icon } from 'lucide-react';
+import { DownloadIcon, Loader2Icon } from 'lucide-react';
 
 const PreviewPanel = ({thumbnail, isLoading, aspectRatio} : 
   {thumbnail: IThumbnail, isLoading: boolean; aspectRatio: AspectRatio}) =>{
@@ -22,7 +22,24 @@ const PreviewPanel = ({thumbnail, isLoading, aspectRatio} :
       {isLoading && (
         <div>
           <Loader2Icon className='size-8 animate-spin text-zinc-400'/>
-        </div>
+       {/* Image preview */}
+{!isLoading && thumbnail?.image_url && (
+  <div className="group relative h-full w-full">
+    <img
+      src={thumbnail?.image_url}
+      alt={thumbnail.title}
+      className="h-full w-full object-cover"
+    />
+
+    <div>
+      <button type="button">
+        <DownloadIcon className="size-4" />
+        Download Thumbnail
+      </button>
+    </div>
+  </div>
+)}
+       </div>
       )}
     </div>
   </div>
