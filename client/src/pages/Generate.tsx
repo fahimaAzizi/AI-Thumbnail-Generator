@@ -39,6 +39,10 @@ const Generate = () => {
         setThumbnail(thumbnail)
         setAdditionalDetails(thumbnail.user_propt)
         setTitle(thumbnail.title)
+        setColorSchemeId(thumbnail.color_scheme)
+        setAspectRatio(thumbnail.aspect_ratio)
+        setStyle(thumbnail.style)
+        setLoading(false)
       }
 
     }
