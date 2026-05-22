@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SoftBackdrop from '../components/SoftBackdrop'
 import { dummyThumbnails, type IThumbnail } from '../assets/assets'
 
@@ -12,7 +12,16 @@ function MyGeneration() {
     setLoading(false)
   }
 
-  const handel
+  const handleDownlaod =  (image_url : string)=>{
+    window.open(image_url ,'_blank')
+  }
+  
+  const handleDelete = async ()=>{
+    console.log(id)
+  }
+  useEffect(()=>{
+    fetchThumbnails()
+  },[])
 
   return (
     <>
