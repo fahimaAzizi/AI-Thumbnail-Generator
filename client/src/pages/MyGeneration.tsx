@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SoftBackdrop from '../components/SoftBackdrop'
+import type { IThumbnail } from '../assets/assets'
 
 function MyGeneration() {
+ 
+  const [thumbnails , setThumbnails] = useState<IThumbnail>([])
+
+
   return (
     <>
 
