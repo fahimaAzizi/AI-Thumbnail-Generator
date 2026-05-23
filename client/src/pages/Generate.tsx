@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import type { ITestimonial, AspectRatio, ThumbnailStyle } from '../types'
 import SoftBackdrop from '../components/SoftBackdrop'
@@ -28,6 +28,19 @@ const Generate = () => {
 
   const [styleDropdownOpen, setStyleDropdownOpen] =
     useState(false)
+
+
+    const handleGenerate = async () =>{
+
+    }
+    const fetchThumbnail = async () => {
+
+    }
+    useEffect(()=>{
+      if(id){
+        fetchThumbnail()
+      }
+    },[id])
 
   return (
     <>
