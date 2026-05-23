@@ -34,6 +34,12 @@ const Generate = () => {
 
     }
     const fetchThumbnail = async () => {
+      if(id){
+        const thumbnail : any = dummyThumbnail.find((thumbnail)=> thumbnail._id === id);
+        setThumbnail(thumbnail)
+        setAdditionalDetails(thumbnail.user_propt)
+        setTitle(thumbnail.title)
+      }
 
     }
     useEffect(()=>{
