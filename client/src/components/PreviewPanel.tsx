@@ -1,6 +1,6 @@
 import React from 'react'
 import type { AspectRatio } from '../assets/assets';
-import { DownloadIcon, Loader2Icon } from 'lucide-react';
+import { DownloadIcon, ImageIcon, Loader2Icon } from 'lucide-react';
 import { div } from 'motion/react-m';
 
 const PreviewPanel = ({thumbnail, isLoading, aspectRatio} : 
@@ -48,10 +48,22 @@ const onDownload =() =>{
 )}
        </div>
       )}
-
       {!isLoading && !thumbnail?.image_url && (
-        <div></div>
-      )}
+  <div className="absolute inset-0 m-2 flex flex-col items-center justify-center gap-4 rounded-lg border-2 border-dashed border-white/20 bg-black/25">
+    
+    <div className="max-sm:hidden flex size-20 items-center justify-center rounded-full bg-white/10">
+      <ImageIcon className='size-10 text-white opacity-50' />
+    </div>
+
+    <div className="px-4 text-center">
+      <p className="font text-zinc-200">Generate your first thumbnail</p>
+      <p className="mt-1 text-xs text-zinc-400">
+        Fill out the form and click Generate
+      </p>
+    </div>
+
+  </div>
+)}
     </div>
   </div>
   )
