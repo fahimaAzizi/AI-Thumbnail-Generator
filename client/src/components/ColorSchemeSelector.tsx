@@ -22,7 +22,7 @@ const ColorSchemeSelector = ({value, onChange}: {value :string;
           </button>
         ))}
        </div>
-       <p>Slectcted:{colorSchemes.find((s)=> s.id === value)?.name} </p>
+       <p className="text-xs text-zinc-400">Slectcted:{colorSchemes.find((s)=> s.id === value)?.name} </p>
     </div>
   )
 }
