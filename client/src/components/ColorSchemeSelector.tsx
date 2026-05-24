@@ -2,7 +2,7 @@ import { div } from "motion/react-client";
 import { colorSchemes } from "../assets/assets"
 
 const ColorSchemeSelector = ({value, onChange}: {value :string;
-    onChange: (coloe: string)=>void })  => {
+    onChange: (color: string)=>void })  => {
  
   return (
     <div className="space-y-3">
@@ -10,7 +10,7 @@ const ColorSchemeSelector = ({value, onChange}: {value :string;
        <div>
         {colorSchemes.map((scheme)=>(
           <button key={scheme.id}
-          onClick={()=>onchange(scheme.id)} className={`relative  rounded-lg transition-all ${value === scheme.id && 'ring-2 ring-pink-500'}`}
+          onClick={()=>onChange(scheme.id)} className={`relative  rounded-lg transition-all ${value === scheme.id && 'ring-2 ring-pink-500'}`}
           title={scheme.name}>
             <div className="flex h-10 rounded-lg overflow-hidden">
               {scheme.colors.map((color , i)=> (
@@ -22,7 +22,7 @@ const ColorSchemeSelector = ({value, onChange}: {value :string;
           </button>
         ))}
        </div>
-       <p className="text-xs text-zinc-400">Slectcted:{colorSchemes.find((s)=> s.id === value)?.name} </p>
+       <p className="text-xs text-zinc-400">Selected:{colorSchemes.find((s)=> s.id === value)?.name} </p>
     </div>
   )
 }
