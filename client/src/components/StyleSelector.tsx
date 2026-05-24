@@ -1,7 +1,6 @@
-import { Type } from "react";
-import { ChevronDownIcon, CpuIcon, ImageIcon, PenToolIcon, SparkleIcon, SquareIcon } from "lucide-react"
+import React from "react";
+import { ChevronDownIcon, CpuIcon, ImageIcon, PenToolIcon, SparklesIcon, SquareIcon } from "lucide-react"
 import { ThumbnailStyle } from "../assets/assets"
-import { div } from "motion/react-client";
 
 const StyleSelector = ({
   value,
@@ -15,28 +14,28 @@ const StyleSelector = ({
   setIsOpen: (open: boolean) => void
 }) => {
   const styleDescriptions: Record<ThumbnailStyle, string> = {
-  "Bold & Graphic": "High contrast, bold typography, striking visuals",
+    "Bold & Graphic": "High contrast, bold typography, striking visuals",
 
-  "Minimalist": "Clean, simple, lots of white space",
+    "Minimalist": "Clean, simple, lots of white space",
 
-  "Photorealistic": "Photo-based, natural looking",
+    "Photorealistic": "Photo-based, natural looking",
 
-  "Illustrated": "Hand-drawn, artistic, creative",
+    "Illustrated": "Hand-drawn, artistic, creative",
 
-  "Tech/Futuristic": "Modern, sleek, tech-inspired",
-}
+    "Tech/Futuristic": "Modern, sleek, tech-inspired",
+  }
 
-const styleIcons: Record<ThumbnailStyle, React.ReactNode> = {
-  "Bold & Graphic": <SparkleIcon className="h-4 w-4" />,
+  const styleIcons: Record<ThumbnailStyle, React.ReactNode> = {
+    "Bold & Graphic": <SparklesIcon className="h-4 w-4" />,
 
-  "Minimalist": <SquareIcon className="h-4 w-4" />,
+    "Minimalist": <SquareIcon className="h-4 w-4" />,
 
-  "Photorealistic": <ImageIcon className="h-4 w-4" />,
+    "Photorealistic": <ImageIcon className="h-4 w-4" />,
 
-  "Illustrated": <PenToolIcon className="h-4 w-4" />,
+    "Illustrated": <PenToolIcon className="h-4 w-4" />,
 
-  "Tech/Futuristic": <CpuIcon className="h-4 w-4" />,
-}
+    "Tech/Futuristic": <CpuIcon className="h-4 w-4" />,
+  }
 
   return (
     <div className="relative space-y-3 dark">
@@ -54,24 +53,25 @@ const styleIcons: Record<ThumbnailStyle, React.ReactNode> = {
           <p className="text-xs text-zinc-400">{styleDescriptions[value]}</p>
 
         </div>
-        <ChevronDownIcon className={['h-5 w-5 textzinc-400 transition-teansfrom', isOpen && 'rotate-180'].join('')} />
+        <ChevronDownIcon className={['h-5 w-5 text-zinc-400 transition-transform', isOpen && 'rotate-180'].join(' ')} />
       </button>
+
       {isOpen && (
         <div className="absolute bottom-0 z-50 mt-1 w-full rounded-md border border-white/12 bg-black/20 backdrop-blur-3xl shadow-lg">
-     {ThumbnailStyle .map((style) => (
-    <button
-      key={style}
-      type='button'
-      onClick={() => {
-        onChange(style);
-        setIsOpen(false);
-      }}
-      className="flex w-full items-start gap-3 px-4 py-3 text-left transition hover:bg-black/30"
-    >
-      <div>{styleIcons[style]}</div>
-    </button>
-  ))}
-</div>
+          {Object.keys(styleDescriptions).map((style) => (
+            <button
+              key={style}
+              type='button'
+              onClick={() => {
+                onChange(style as ThumbnailStyle);
+                setIsOpen(false);
+              }}
+              className="flex w-full items-start gap-3 px-4 py-3 text-left transition hover:bg-black/30"
+            >
+              <div>{styleIcons[style as ThumbnailStyle]}</div>
+            </button>
+          ))}
+        </div>
       )}
 
     </div>
