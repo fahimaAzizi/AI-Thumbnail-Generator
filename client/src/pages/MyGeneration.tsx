@@ -57,6 +57,39 @@ function MyGeneration() {
     <p className='tet-sm text-zinc-400 mt-2'>Generate your first thumbnail to see it here</p>
   </div>
 )}
+
+{/* GRID */}
+{loading && thumbnails.length > 0 && (
+  <div className="columns-1 sm:columns-2 lg:columns-3 2xl:columns-4 gap-8">
+  {thumbnails.map((thumb: IThumbnail) => {
+    const aspectClass =
+      aspectRatioClassMap[thumb.aspect_ratio || '16:9'];
+
+    return (
+      <div
+        key={thumb.id}
+        onClick={() => navigate(`/generate/${thumb.id}`)}
+        className="mb-8 group relative cursor-pointer rounded-2xl bg-white/6 border border-white/10 transition shadow-xl break-inside-avoid"
+      >
+        {/* IMAGE */}
+        <div className={`overflow-hidden rounded-t-2xl ${aspectClass}`}>
+          {thumb.image_url ? (
+            <img
+              src={thumb.image_url}
+              alt={thumb.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+          ) : (
+            <div>
+              {thumb.isGenerating ? 'Generating…' : 'No image'}
+            </div>
+          )}
+        </div>
+      </div>
+    )
+  })}
+</div>
+)}
     </div>
 
     </>
