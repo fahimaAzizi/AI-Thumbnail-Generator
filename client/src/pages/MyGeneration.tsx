@@ -84,6 +84,8 @@ function MyGeneration() {
               {thumb.isGenerating ? 'Generating…' : 'No image'}
             </div>
           )}
+          {thumbnails.isGenerating && <div
+          className='absolute inset-0 bg-black/50 flrx items-center justify-center text-sm font-medium text-white'>Generate...</div>}
         </div>
       </div>
     )
