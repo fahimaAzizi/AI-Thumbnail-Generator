@@ -54,6 +54,7 @@ function MyGeneration() {
     <h3 className="text-lg font-semibold text-zinc-200">
       No thumbnails yet
     </h3>
+    <p className='tet-sm text-zinc-400 mt-2'>Generate your first thumbnail to see it here</p>
   </div>
 )}
     </div>
