@@ -1,6 +1,6 @@
 import React from "react";
 import { ChevronDownIcon, CpuIcon, ImageIcon, PenToolIcon, SparklesIcon, SquareIcon } from "lucide-react"
-import { ThumbnailStyle } from "../assets/assets"
+import type { ThumbnailStyle } from "../assets/assets"
 
 const StyleSelector = ({
   value,
@@ -44,16 +44,24 @@ const StyleSelector = ({
         Thumbnail Style
       </label>
 
-      <button>
+      <button type="button">
         <div className="space-y-1">
           <div>
             {styleIcons[value]}
             <span>{value}</span>
           </div>
-          <p className="text-xs text-zinc-400">{styleDescriptions[value]}</p>
 
+          <p className="text-xs text-zinc-400">
+            {styleDescriptions[value]}
+          </p>
         </div>
-        <ChevronDownIcon className={['h-5 w-5 text-zinc-400 transition-transform', isOpen && 'rotate-180'].join(' ')} />
+
+        <ChevronDownIcon
+          className={[
+            'h-5 w-5 text-zinc-400 transition-transform',
+            isOpen && 'rotate-180'
+          ].join(' ')}
+        />
       </button>
 
       {isOpen && (
@@ -63,8 +71,8 @@ const StyleSelector = ({
               key={style}
               type='button'
               onClick={() => {
-                onChange(style as ThumbnailStyle);
-                setIsOpen(false);
+                onChange(style as ThumbnailStyle)
+                setIsOpen(false)
               }}
               className="flex w-full items-start gap-3 px-4 py-3 text-left transition hover:bg-black/30"
             >
