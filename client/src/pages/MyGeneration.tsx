@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import SoftBackdrop from '../components/SoftBackdrop'
 import { dummyThumbnails, type IThumbnail } from '../assets/assets'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { ArrowUpRightIcon, DownloadIcon, TrashIcon } from 'lucide-react'
 
 function MyGeneration() {
 
@@ -133,6 +134,28 @@ function MyGeneration() {
                       {new Date(thumb.createdAt!).toDateString()}
                     </p>
                   </div>
+<div  onClick={(e)=>e.stopPropagation()}
+className="absolute bottom-2 right-2 max-sm:flex sm:hidden group-hover:flex gap-1.5">
+
+  <TrashIcon
+    onClick={() => handleDelete(thumb._id)}
+    className="size-6 bg-black/50 p-1 rounded hover:bg-pink-600 transition-all"
+  />
+
+  <DownloadIcon
+    onClick={() => handleDownlaod(thumb.image_url!)}
+    className='size-6 bg-black/50 p-1 rounded hover:bg-pink-600 transition-all'
+  />
+
+  <Link 
+    target="_blank"
+    to={`/preview?thumbnail_url=${thumb.image_url}&title=${thumb.title}`}
+  >
+    <ArrowUpRightIcon className='size-6 bg-black/50 p-1 rounded hover:bg-pink-600 transition-all' />
+  </Link>
+
+</div>
+
 
                 </div>
               )
