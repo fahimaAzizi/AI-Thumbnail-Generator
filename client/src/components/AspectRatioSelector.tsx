@@ -7,7 +7,7 @@ const AspectRatioSelector = ({
   onChange,
 }: {
   value: AspectRatio
-  onChange: (ratio: AspectRatio) => void
+  onChange: (ratio: AspectRatio ) => void
 }) => {
 
   const iconMap = {
@@ -24,7 +24,7 @@ const AspectRatioSelector = ({
       </label>
 
       <div className='flex flex-wrap gap-2'>
-        {aspectRatioSelector.map((ratio) => {
+        {AspectRatioSelector.map((ratio) => {
           const selected = value === ratio
 
           return (
