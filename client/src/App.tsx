@@ -6,7 +6,7 @@ import "./globals.css";
 import LenisScroll from "./components/LenisScroll";
 import MyGeneration from "./pages/MyGeneration";
 import Generate from "./pages/Generate";
-import Ytpreview from "./pages/Ytpreview";
+import Ytpreview from "./pages/YtPreview";
 import Login from "./components/Login";
 import { useEffect } from "react";
 
