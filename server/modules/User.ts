@@ -16,9 +16,9 @@ const userSchema = new mongoose.Schema<Iuser>({
     
  
  
-} ,{Timestamp: true})
+} ,{timestamps : true})
 
-const User = mongoose.models.User || mongoose.mpdel<Iuser>('User',
+const User = mongoose.models.User || mongoose.model<Iuser>('User',
     userSchema)
 
     export default User;
