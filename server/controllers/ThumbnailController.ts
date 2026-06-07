@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import Thumbnail from '../modules/Thumbnail.js';
+import { GenerateContentConfig } from '@google/genai';
 
 
 export const generateThumbnail = async (
@@ -42,10 +43,49 @@ export const generateThumbnail = async (
 
     });
 
-    res.status(201).json({
-      success: true,
-      thumbnail
-    });
+    const model = 'gemini-image-preview';
+
+    const generationConfig : GenerateContentConfig ={
+      maxOutputTokens: 32768,
+
+temperature: 1,
+
+topP: 0.95,
+
+responseModalities: ['IMAGE'],
+
+imageConfig: {
+  aspectRatio: '16:9',
+  imageSize: '1K'
+},
+
+safetySettings: [
+
+  {
+    category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+    threshold: HarmBlockThreshold.OFF
+  },
+
+  {
+    category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+    threshold: HarmBlockThreshold.OFF
+  },
+
+  {
+    category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+    threshold: HarmBlockThreshold.OFF
+  },
+
+  {
+    category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+    threshold: HarmBlockThreshold.OFF
+  },
+
+]
+      
+    }
+
+
 
   } catch (error) {
 
