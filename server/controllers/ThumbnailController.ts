@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import Thumbnail from '../modules/Thumbnail.js';
-import { GenerateContentConfig } from '@google/genai';
+import { GenerateContentConfig, HarmBlockThreshold, HarmCategory } from '@google/genai';
 
 
 export const generateThumbnail = async (
