@@ -1,6 +1,9 @@
 import { Request, Response } from 'express'
 import Thumbnail from '../modules/Thumbnail.js';
 import { GenerateContentConfig, HarmBlockThreshold, HarmCategory } from '@google/genai';
+import path from 'node:path';
+import ai from '../configs/ai.js';
+
 
 const stylePrompts = {
 
@@ -150,6 +153,7 @@ if (finalBuffer) {
 } else {
     throw new Error('No image data found in response');
 }
+
 
 
 
