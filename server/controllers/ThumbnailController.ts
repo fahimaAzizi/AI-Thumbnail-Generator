@@ -101,7 +101,26 @@ safetySettings: [
 ]
       
     }
-    let prompt = `Create a ${stylePrompts} for: "${title}"` 
+let prompt = `Create a ${stylePrompts[style as keyof typeof stylePrompts]}
+for: "${title}"`;
+
+if (color_scheme) {
+
+  prompt += ` Use a ${colorSchemeDescriptions[
+    color_scheme as keyof typeof colorSchemeDescriptions
+  ]} color scheme.`;
+
+}
+
+if (user_prompt) {
+
+  prompt += ` Additional details: ${user_prompt}.`;
+
+}
+
+prompt += ` The thumbnail should be ${aspect_ratio},
+visually stunning, and designed to maximize click-through rate.
+Make it bold, professional, and impossible to ignore.`;
 
 
 
