@@ -122,14 +122,40 @@ prompt += ` The thumbnail should be ${aspect_ratio},
 visually stunning, and designed to maximize click-through rate.
 Make it bold, professional, and impossible to ignore.`;
 
+ const response: any = await ai.model.generateContent({
+  model,
+  contents:[prompt],
+  config : generationConfig
+ })
+ if(!response?.candidates?.[0]?.content?.parts){
+    throw new Error('Unexpected response')
+}
+
+const parts = response.candidates[0].content.parts;
+
+let finalBuffer: Buffer | null = null;
+
+for(const part of parts){
+    if(part.inlineData){
+    finalBuffer = Buffer.from(part.inlineData.data, 'base64')
+    }
+}
+
+const filename = `final-output-${Date.now()}.png`;
+const filePath = path.join(__dirname, filename);
+
+if (finalBuffer) {
+    require('fs').writeFileSync(filePath, finalBuffer);
+    console.log(`File saved successfully at: ${filePath}`);
+} else {
+    throw new Error('No image data found in response');
+}
+
 
 
   } catch (error) {
 
-    res.status(500).json({
-      success: false,
-      message: 'Failed to generate thumbnail'
-    });
+    
 
   }
 
