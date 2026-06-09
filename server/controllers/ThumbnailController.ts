@@ -1,12 +1,16 @@
-import { Request, Response } from 'express'
+import { Request, Response } from 'express';
 import Thumbnail from '../modules/Thumbnail.js';
 import { GenerateContentConfig, HarmBlockThreshold, HarmCategory } from '@google/genai';
 import path from 'node:path';
+import fs from 'fs';
 import ai from '../configs/ai.js';
+import { fileURLToPath } from 'url';
 
+// fix __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const stylePrompts = {
-
   'Bold & Graphic':
     'eye-catching thumbnail, bold typography, vibrant colors, expressive facial reaction, dramatic lighting, high contrast, click-worthy composition, professional style',
 
@@ -21,15 +25,17 @@ const stylePrompts = {
 
   'Illustrated':
     'illustrated thumbnail, custom digital illustration, stylized characters, bold outlines, vibrant colors, creative cartoon or vector art style'
+};
 
-}
-export const generateThumbnail = async (
-  req: Request,
-  res: Response
-) => {
+const colorSchemeDescriptions = {
+  warm: 'warm tones like red, orange, and yellow',
+  cool: 'cool tones like blue, cyan, and purple',
+  dark: 'dark cinematic tones',
+  pastel: 'soft pastel tones'
+};
 
+export const generateThumbnail = async (req: Request, res: Response) => {
   try {
-
     const { userId } = req.session;
 
     const {
@@ -42,125 +48,94 @@ export const generateThumbnail = async (
     } = req.body;
 
     const thumbnail = await Thumbnail.create({
-
       userId,
-
       title,
-
       prompt_used: user_prompt,
-
       user_prompt,
-
       style,
-
       aspect_ratio,
-
       color_scheme,
-
       text_overlay,
-
       isGenerating: true
-
     });
 
     const model = 'gemini-image-preview';
 
-    const generationConfig : GenerateContentConfig ={
+    const generationConfig: GenerateContentConfig = {
       maxOutputTokens: 32768,
+      temperature: 1,
+      topP: 0.95,
+      responseModalities: ['IMAGE'],
+      imageConfig: {
+        aspectRatio: aspect_ratio || '16:9',
+        imageSize: '1K'
+      },
+      safetySettings: [
+        { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.OFF },
+        { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.OFF },
+        { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.OFF },
+        { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.OFF }
+      ]
+    };
 
-temperature: 1,
-
-topP: 0.95,
-
-responseModalities: ['IMAGE'],
-
-imageConfig: {
-  aspectRatio: '16:9',
-  imageSize: '1K'
-},
-
-safetySettings: [
-
-  {
-    category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-    threshold: HarmBlockThreshold.OFF
-  },
-
-  {
-    category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-    threshold: HarmBlockThreshold.OFF
-  },
-
-  {
-    category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-    threshold: HarmBlockThreshold.OFF
-  },
-
-  {
-    category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-    threshold: HarmBlockThreshold.OFF
-  },
-
-]
-      
-    }
-let prompt = `Create a ${stylePrompts[style as keyof typeof stylePrompts]}
+    let prompt = `Create a ${stylePrompts[style as keyof typeof stylePrompts]}
 for: "${title}"`;
 
-if (color_scheme) {
-
-  prompt += ` Use a ${colorSchemeDescriptions[
-    color_scheme as keyof typeof colorSchemeDescriptions
-  ]} color scheme.`;
-
-}
-
-if (user_prompt) {
-
-  prompt += ` Additional details: ${user_prompt}.`;
-
-}
-
-prompt += ` The thumbnail should be ${aspect_ratio},
-visually stunning, and designed to maximize click-through rate.
-Make it bold, professional, and impossible to ignore.`;
-
- const response: any = await ai.model.generateContent({
-  model,
-  contents:[prompt],
-  config : generationConfig
- })
- if(!response?.candidates?.[0]?.content?.parts){
-    throw new Error('Unexpected response')
-}
-
-const parts = response.candidates[0].content.parts;
-
-let finalBuffer: Buffer | null = null;
-
-for(const part of parts){
-    if(part.inlineData){
-    finalBuffer = Buffer.from(part.inlineData.data, 'base64')
+    if (color_scheme) {
+      prompt += ` Use a ${colorSchemeDescriptions[color_scheme as keyof typeof colorSchemeDescriptions]} color scheme.`;
     }
-}
 
-const filename = `final-output-${Date.now()}.png`;
-const filePath = path.join(__dirname, filename);
+    if (user_prompt) {
+      prompt += ` Additional details: ${user_prompt}.`;
+    }
 
-if (finalBuffer) {
-    require('fs').writeFileSync(filePath, finalBuffer);
-    console.log(`File saved successfully at: ${filePath}`);
-} else {
-    throw new Error('No image data found in response');
-}
+    prompt += ` The thumbnail should be ${aspect_ratio}, visually stunning, and designed to maximize click-through rate.`;
 
+    const response: any = await ai.model.generateContent({
+      model,
+      contents: [prompt],
+      config: generationConfig
+    });
 
+    const parts = response?.candidates?.[0]?.content?.parts;
+    if (!parts) throw new Error('Unexpected response from AI');
 
+    let finalBuffer: Buffer | null = null;
 
-  } catch (error) {
+    for (const part of parts) {
+      if (part.inlineData?.data) {
+        finalBuffer = Buffer.from(part.inlineData.data, 'base64');
+      }
+    }
 
-    
+    if (!finalBuffer) {
+      throw new Error('No image generated');
+    }
 
+    const filename = `thumbnail-${Date.now()}.png`;
+    const filePath = path.join(__dirname, '..', 'images', filename);
+
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+    fs.writeFileSync(filePath, finalBuffer);
+
+    // TODO: update DB
+    await Thumbnail.findByIdAndUpdate(thumbnail._id, {
+      imageUrl: `/images/${filename}`,
+      isGenerating: false
+    });
+
+    return res.status(200).json({
+      success: true,
+      imageUrl: `/images/${filename}`,
+      thumbnailId: thumbnail._id
+    });
+
+  } catch (error: any) {
+    console.error('Thumbnail generation error:', error);
+
+    return res.status(500).json({
+      success: false,
+      message: error.message || 'Something went wrong'
+    });
   }
-
-}
+};
