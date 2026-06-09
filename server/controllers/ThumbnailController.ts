@@ -117,25 +117,30 @@ for: "${title}"`;
 
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
     fs.writeFileSync(filePath, finalBuffer);
+    const uploadResult = await cloudinary.uploader.upload(
+  filePath,
+  { resource_type: 'image' }
+)
 
-    // TODO: update DB
-    await Thumbnail.findByIdAndUpdate(thumbnail._id, {
-      imageUrl: `/images/${filename}`,
-      isGenerating: false
-    });
+thumbnail.image_url = uploadResult.url;
+thumbnail.isGenerating = false;
 
-    return res.status(200).json({
-      success: true,
-      imageUrl: `/images/${filename}`,
-      thumbnailId: thumbnail._id
-    });
+await thumbnail.save();
 
-  } catch (error: any) {
-    console.error('Thumbnail generation error:', error);
+res.json({
+  message: 'Thumbnail Generated',
+  thumbnail
+});
 
-    return res.status(500).json({
-      success: false,
-      message: error.message || 'Something went wrong'
-    });
-  }
-};
+// remove image file from disk
+fs.unlinkSync(filePath);
+
+} catch (error: any) {
+  console.log(error);
+
+  res.status(500).json({
+    message: error.message
+  });
+}
+  
+}
