@@ -1,9 +1,7 @@
-import React from 'react'
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-function ai() {
-  return (
-    <div>ai</div>
-  )
-}
+const ai = new GoogleGenerativeAI(
+  process.env.GEMINI_API_KEY as string
+);
 
-export default ai
+export default ai;
