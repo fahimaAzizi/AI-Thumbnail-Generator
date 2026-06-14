@@ -7,12 +7,22 @@ interface AuthContextProps {
   user: IUser | null;
   setUser: (user: IUser | null) => void;
   login: (user: {email: string; password: string}) => Promise<void>;
-   signUp: (user: {name:string; email: string; password: string}) => Promise<void>;
-}
+  signUp: (user: {name:string; email: string; password: string}) => Promise<void>;
+   logout: () => Promise<void>
+  }
 
-export const AuthContext = createContext<AuthContextProps | undefined>(
-  undefined
-);
+const AuthContext = createContext<AuthContextProps>({
+  isLoggedIn: false,
+  setIsLoggedIn: ()=> {},
+  user: null,
+  setUser: ()=> {},
+  login: async () => {},
+  signUp: async () => {},
+  logout: async () => {},
+
+})
+
+
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
