@@ -6,7 +6,8 @@ interface AuthContextProps {
   setIsLoggedIn: (isLoggedIn: boolean) => void;
   user: IUser | null;
   setUser: (user: IUser | null) => void;
-  login: (user: IUser) => Promise<void>;
+  login: (user: {email: string; password: string}) => Promise<void>;
+   signUp: (user: {name:string; email: string; password: string}) => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextProps | undefined>(
