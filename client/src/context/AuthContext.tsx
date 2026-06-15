@@ -1,5 +1,6 @@
  import { createContext, ReactNode, useState } from "react";
 import type { IUser } from "../types/user"; // adjust path
+import toast from "react-hot-toast";
 
 interface AuthContextProps {
   isLoggedIn: boolean;
@@ -32,11 +33,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const {data} =await api.post('/api/auth/register',{name,email,password});
       if(data.user){
-        setUser
+        setUser(data.user as IUser)
+        setIsLoggedIn(true)
       }
+      toast.success(data(data.message))
       
     } catch (error) {
-      
+      console.log(error)      
     }
   }
   const login = async (user: IUser) => {
