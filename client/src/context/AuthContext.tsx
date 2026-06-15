@@ -24,10 +24,21 @@ const AuthContext = createContext<AuthContextProps>({
 
 
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
 
+  const signUp = async ({name, email, password} : {name: string; email: string ; password: string}) =>{
+    try {
+      const {data} =await api.post('/api/auth/register',{name,email,password});
+      if(data.user){
+        setUser
+      }
+      
+    } catch (error) {
+      
+    }
+  }
   const login = async (user: IUser) => {
     setUser(user);
     setIsLoggedIn(true);
