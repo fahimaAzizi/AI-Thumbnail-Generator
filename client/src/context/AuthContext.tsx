@@ -73,19 +73,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       console.log(error)      
     }
   }
-  const fetchUser = async ()=>{
-       try {
+   const fetchUser = async ()=>{
+        try {
       const {data} =await api.get('/api/auth/verify');
       if(data.user){
         setUser(data.user as IUser)
         setIsLoggedIn(true)
       }
-      setUser(null)
-        setIsLoggedIn(false)
-      toast.success(data(data.message))
-      
-      
     } catch (error) {
+      setUser(null)
+      setIsLoggedIn(false)
       console.log(error)      
     }
   }

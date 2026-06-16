@@ -20,9 +20,8 @@ export interface IThumbnail extends Document {
   createdAt?: Date;
   updatedAt?: Date;
 }
-const Thumbnail= new mongoose.Schema<IThumbnail>(
-    {
-        
+
+const ThumbnailSchema = new mongoose.Schema<IThumbnail>({
   userId: { type: String, ref: 'User', required: true },
 
   title: { type: String, required: true, trim: true },
@@ -71,6 +70,7 @@ const Thumbnail= new mongoose.Schema<IThumbnail>(
 
   isGenerating: { type: Boolean, default: true }
 
-    }
-)
-export default Thumbnail
+});
+
+const ThumbnailModel = mongoose.models.Thumbnail || mongoose.model<IThumbnail>('Thumbnail', ThumbnailSchema);
+export default ThumbnailModel;
