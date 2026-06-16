@@ -1,6 +1,7 @@
- import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import type { IUser } from "../types/user"; // adjust path
+  import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import type { IUser } from "../types/user";
 import toast from "react-hot-toast";
+import api from "../configs/api";
 
 interface AuthContextProps {
   isLoggedIn: boolean;
@@ -36,7 +37,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(data.user as IUser)
         setIsLoggedIn(true)
       }
-      toast.success(data(data.message))
+      toast.success(data.message)
       
     } catch (error) {
       console.log(error)      
@@ -53,7 +54,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(data.user as IUser)
         setIsLoggedIn(true)
       }
-      toast.success(data(data.message))
+      toast.success(data.message)
       
     } catch (error) {
       console.log(error)      
@@ -65,7 +66,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const {data} =await api.post('/api/auth/logout');
       setUser(null)
         setIsLoggedIn(false)
-      toast.success(data(data.message))
+      toast.success(data.message)
       
       
     } catch (error) {

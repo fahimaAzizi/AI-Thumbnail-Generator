@@ -5,6 +5,7 @@ import path from 'node:path';
 import fs from 'fs';
 import ai from '../configs/ai.js';
 import { fileURLToPath } from 'url';
+import cloudinary from 'cloudinary';
 
 // fix __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import type { ITestimonial, AspectRatio, ThumbnailStyle } from '../types'
+import { ITestimonial, AspectRatio, ThumbnailStyle } from '../types'
 import SoftBackdrop from '../components/SoftBackdrop'
 import AspectRatioSelector from '../components/AspectRatioSelector'
-import { colorSchemes } from '../assets/assets'
+import { colorSchemes, dummyThumbnails } from '../assets/assets'
 import StyleSelector from '../components/StyleSelector'
 import ColorSchemeSelector from '../components/ColorSchemeSelector'
 import PreviewPanel from '../components/PreviewPanel'
@@ -35,7 +35,7 @@ const Generate = () => {
     }
     const fetchThumbnail = async () => {
       if(id){
-        const thumbnail : any = dummyThumbnail.find((thumbnail)=> thumbnail._id === id);
+        const thumbnail : any = dummyThumbnails.find((thumbnail)=> thumbnail._id === id);
         setThumbnail(thumbnail)
         setAdditionalDetails(thumbnail.user_propt)
         setTitle(thumbnail.title)
