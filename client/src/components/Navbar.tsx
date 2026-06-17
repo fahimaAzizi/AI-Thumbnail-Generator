@@ -1,12 +1,13 @@
 import { MenuIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { motion } from "motion/react";
-import { navlinks } from "../data/navlinks";
-import type { INavLink } from "../types";
-import { Link, NavLink } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function Navbar() {
+    const {isLoggedIn, user,logout} = useAuth
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate()
 
     return (
         <>
@@ -21,10 +22,18 @@ export default function Navbar() {
             </Link>
                 <div className="hidden md:flex items-center gap-8 transition duration-500">
                     <Link to='/' className="hover:text-pink-300 transition">Home</Link>
+                    {
+                        isLoggedIn ?  <Link to='/my-generation' className="hover:text-pink-300 transition">My-Generate </Link>
+                        : <Link to='#' className="hover:text-pink-300 transition">About</Link>
+                    }
                     <Link to='/generate' className="hover:text-pink-300 transition">Generate</Link>
-                    <Link to='/my-generation' className="hover:text-pink-300 transition">My-Generate </Link>
-                    <Link to='#' className="hover:text-pink-300 transition">Contact</Link>
+
+                   <Link to='#' className="hover:text-pink-300 transition">ContactUs</Link>
+                    
                 
+                </div>
+                <div>
+                    
                 </div>
 
                 <button className="hidden md:block px-6 py-2.5 bg-pink-600 hover:bg-pink-700 active:scale-95 transition-all rounded-full">
