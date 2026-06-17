@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import Thumbnail from '../modules/Thumbnail.js';
+import Thumbnail from '../modules/Thumbnail.ts';
 import { GenerateContentConfig, HarmBlockThreshold, HarmCategory } from '@google/genai';
 import path from 'node:path';
 import fs from 'fs';
-import ai from '../configs/ai.js';
+import ai from '../configs/ai.ts';
 import { fileURLToPath } from 'url';
 import cloudinary from 'cloudinary';
 

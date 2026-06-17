@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import bcrypt from 'bcrypt';
-import User from '../modules/User.js';
+import User from '../modules/User.ts';
 
 
 // Controllers For User Registration

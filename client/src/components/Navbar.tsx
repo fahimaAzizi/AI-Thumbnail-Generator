@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthContext";
 import { button } from "motion/react-client";
 
 export default function Navbar() {
-    const {isLoggedIn, user,logout} = useAuth
+    const {isLoggedIn, user,logout} = useAuth()
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate()
 
