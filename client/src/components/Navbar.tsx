@@ -47,8 +47,8 @@ export default function Navbar() {
                             </div>
                         </div>
                     ) : (
-                        <button className="hidden md:block px-6 py-2.5 bg-pink-600 hover:bg-pink-700 active:scale-95 transition-all rounded-full">
-                    Start free trial
+                        <button onClick={()=>navigate('/login')} className="hidden md:block px-6 py-2.5 bg-pink-600 hover:bg-pink-700 active:scale-95 transition-all rounded-full">
+                     Get Started
                 </button>
                     )}
 
