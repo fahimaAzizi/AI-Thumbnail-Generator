@@ -1,5 +1,7 @@
 import { useState } from "react"
 import SoftBackdrop from "./SoftBackdrop"
+import { useAuth } from "../context/AuthContext"
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
 
@@ -16,9 +18,21 @@ const Login = () => {
         setFormData(prev => ({ ...prev, [name]: value }))
     }
 
-    const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    const navigate = useNavigate()
+    const {login, signUp} = useAuth()
 
+    const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        try {
+            if (state === "login") {
+                await login({ email: formData.email, password: formData.password })
+            } else {
+                await signUp({ name: formData.name, email: formData.email, password: formData.password })
+            }
+            navigate('/')
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (

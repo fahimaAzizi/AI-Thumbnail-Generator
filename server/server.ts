@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors'
 import 'dotenv/config'
-import connectDB from './configs/db.ts';
+import connectDB, { getIsConnected } from './configs/db.ts';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import AuthRouter from './routes/AuthRoutes.ts';
@@ -20,7 +20,7 @@ await connectDB();
 const app = express();
 
 app.use(cors({
-    origin:['http://localhost:5173','http://localhost:3000'],
+    origin:['http://localhost:5173','http://localhost:5174','http://localhost:3000'],
     credentials: true 
 }))
 
@@ -28,12 +28,11 @@ app.use(session({
     secret: process.env.SESSION_SECRET as string,
     resave : false,
     saveUninitialized : false,
-    cookie : {maxAge: 1000 * 60* 60 *24 *7} ,//7days
-    store: MongoStore.create({
+    cookie : {maxAge: 1000 * 60* 60 *24 *7},
+    store: getIsConnected() ? MongoStore.create({
         mongoUrl : process.env.MONGODB_URI as string,
         collectionName : 'sessions'
-    })
-
+    }) : undefined
 }))
 
 

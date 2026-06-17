@@ -4,4 +4,7 @@ const ai = new GoogleGenerativeAI(
   process.env.GEMINI_API_KEY as string
 );
 
+export const getModel = () => ai.getGenerativeModel({ model: 'gemini-image-preview' });
+
 export default ai;
+

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { ITestimonial, AspectRatio, ThumbnailStyle } from '../types'
+import type { ITestimonial, AspectRatio, ThumbnailStyle } from '../assets/assets'
 import SoftBackdrop from '../components/SoftBackdrop'
 import AspectRatioSelector from '../components/AspectRatioSelector'
 import { colorSchemes, dummyThumbnails } from '../assets/assets'
@@ -37,7 +37,7 @@ const Generate = () => {
       if(id){
         const thumbnail : any = dummyThumbnails.find((thumbnail)=> thumbnail._id === id);
         setThumbnail(thumbnail)
-        setAdditionalDetails(thumbnail.user_propt)
+        setAdditionalDetails(thumbnail.user_prompt)
         setTitle(thumbnail.title)
         setColorSchemeId(thumbnail.color_scheme)
         setAspectRatio(thumbnail.aspect_ratio)

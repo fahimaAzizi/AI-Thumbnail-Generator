@@ -1,4 +1,3 @@
-import { div } from "motion/react-client";
 import { colorSchemes } from "../assets/assets"
 
 const ColorSchemeSelector = ({value, onChange}: {value :string;

@@ -1,6 +1,5 @@
 import { RectangleHorizontal, RectangleVertical, Square } from 'lucide-react'
 import { type AspectRatio, aspectRatios } from '../assets/assets'
-import type React from 'react'
 
 const AspectRatioSelector = ({
   value,
@@ -24,7 +23,7 @@ const AspectRatioSelector = ({
       </label>
 
       <div className='flex flex-wrap gap-2'>
-        {AspectRatioSelector.map((ratio) => {
+        {aspectRatios.map((ratio) => {
           const selected = value === ratio
 
           return (

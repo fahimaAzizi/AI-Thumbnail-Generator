@@ -3,13 +3,20 @@ import Thumbnail from '../modules/Thumbnail.ts';
 import { GenerateContentConfig, HarmBlockThreshold, HarmCategory } from '@google/genai';
 import path from 'node:path';
 import fs from 'fs';
-import ai from '../configs/ai.ts';
+import { getModel } from '../configs/ai.ts';
 import { fileURLToPath } from 'url';
 import cloudinary from 'cloudinary';
 
-// fix __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+cloudinary.v2.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+const model = getModel();
 
 const stylePrompts = {
   'Bold & Graphic':
@@ -92,7 +99,7 @@ for: "${title}"`;
 
     prompt += ` The thumbnail should be ${aspect_ratio}, visually stunning, and designed to maximize click-through rate.`;
 
-    const response: any = await ai.model.generateContent({
+    const response: any = await (model as any).generateContent({
       model,
       contents: [prompt],
       config: generationConfig
@@ -118,7 +125,7 @@ for: "${title}"`;
 
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
     fs.writeFileSync(filePath, finalBuffer);
-    const uploadResult = await cloudinary.uploader.upload(
+    const uploadResult = await cloudinary.v2.uploader.upload(
   filePath,
   { resource_type: 'image' }
 )

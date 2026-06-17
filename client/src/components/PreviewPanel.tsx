@@ -1,10 +1,9 @@
 import React from 'react'
-import type { AspectRatio } from '../assets/assets';
+import type { AspectRatio, IThumbnail } from '../assets/assets';
 import { DownloadIcon, ImageIcon, Loader2Icon } from 'lucide-react';
-import { div } from 'motion/react-m';
 
 const PreviewPanel = ({thumbnail, isLoading, aspectRatio} : 
-  {thumbnail: IThumbnail, isLoading: boolean; aspectRatio: AspectRatio}) =>{
+  {thumbnail: IThumbnail | null, isLoading: boolean; aspectRatio: AspectRatio}) =>{
     
     
     
