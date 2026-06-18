@@ -9,6 +9,7 @@ import ColorSchemeSelector from '../components/ColorSchemeSelector'
 import PreviewPanel from '../components/PreviewPanel'
 import { useAuth } from '../context/AuthContext'
 import toast from 'react-hot-toast'
+import { AwardIcon } from 'lucide-react'
 
 const Generate = () => {
   const { id } = useParams()
@@ -40,10 +41,20 @@ const Generate = () => {
         if(!title.trim()) return toast.error('Title is required')
           setLoading(true)
     
-    conat api_paload = {
-      
-    }
+    const api_paload = {
+      title,
+      prompt: additionalDetails,
+      style,
+      aspect_ratio: aspectRatio,
+      color_scheme:colorSchemeId,
+      text_overlay: true,
 
+    }
+    const {data} = await api.post('/api/thumbnail/generate', api_paload);
+    if(data.thumbnail){
+      navigate('/generate/' + data.thumbnail._id);
+      toast.success(data.message)
+    }
     }
     const fetchThumbnail = async () => {
       if(id){
