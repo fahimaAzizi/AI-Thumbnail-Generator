@@ -10,6 +10,7 @@ import PreviewPanel from '../components/PreviewPanel'
 import { useAuth } from '../context/AuthContext'
 import toast from 'react-hot-toast'
 import { AwardIcon } from 'lucide-react'
+import api from '../configs/api'
 
 const Generate = () => {
   const { id } = useParams()
