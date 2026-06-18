@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import type { ITestimonial, AspectRatio, ThumbnailStyle } from '../assets/assets'
 import SoftBackdrop from '../components/SoftBackdrop'
 import AspectRatioSelector from '../components/AspectRatioSelector'
@@ -7,10 +7,15 @@ import { colorSchemes, dummyThumbnails } from '../assets/assets'
 import StyleSelector from '../components/StyleSelector'
 import ColorSchemeSelector from '../components/ColorSchemeSelector'
 import PreviewPanel from '../components/PreviewPanel'
+import { useAuth } from '../context/AuthContext'
+import toast from 'react-hot-toast'
 
 const Generate = () => {
   const { id } = useParams()
-
+  const {pathname} =useLocation()
+  const navigate = useNavigate()
+  const {isLoggedIn} = useAuth()
+ 
   const [title, setTitle] = useState('')
   const [additionalDetails, setAdditionalDetails] = useState('')
 
@@ -31,6 +36,13 @@ const Generate = () => {
 
 
     const handleGenerate = async () =>{
+      if(isLoggedIn) return toast.error('pleas login generate thumbnails')
+        if(!title.trim()) return toast.error('Title is required')
+          setLoading(true)
+    
+    conat api_paload = {
+      
+    }
 
     }
     const fetchThumbnail = async () => {
